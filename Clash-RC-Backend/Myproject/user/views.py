@@ -62,6 +62,25 @@ def task1(request):
         s = [int(s) for s in re.findall(r'-?\d+\.?\d*', string)]
         params = {'analazed': s}
         return render(request,'user/task1.html',params)
+    else:
+        return HttpResponse("Error")
+
+def task2(request):
+    if request.method=="POST":
+        string1=request.POST.get('text')
+        date = [int(s) for s in re.findall(r'^(?P<date>\d{4}-\d{2}-\d{2})/$', string1)]
+        params = {'analazed': date}
+        return render(request,'user/task2.html',params)
+
+    else:
+        return HttpResponse("Error")
+
+def task2(request):
+    if request.method=="POST":
+        string1=request.POST.get('text')
+        str = [int(s) for s in re.findall(r'^(?P<date>\d{4}-\d{2}-\d{2})/$', string1)]
+        params = {'analazed': str}
+        return render(request,'user/task2.html',params)
 
     else:
         return HttpResponse("Error")
