@@ -75,12 +75,35 @@ def task2(request):
     else:
         return HttpResponse("Error")
 
-def task2(request):
+def task3(request):
     if request.method=="POST":
-        string1=request.POST.get('text')
-        str = [int(s) for s in re.findall(r'^(?P<date>\d{4}-\d{2}-\d{2})/$', string1)]
+        string2=request.POST.get('text')
+        str = [int(s) for s in re.findall(r"'([^']*)'", string2)]
         params = {'analazed': str}
-        return render(request,'user/task2.html',params)
+        return render(request,'user/task3.html',params)
+
+    else:
+        return HttpResponse("Error")
+
+def task4(request):
+    if request.method=="POST":
+        string3=request.POST.get('text')
+        if len(string3) > 6:
+            if re.match('\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b', string3) != None:
+                params = {'analazed': 1}
+                return render(request,'user/task4.html',params)
+        params = {'analazed': 0}
+        return render(request,'user/task4.html',params)
+
+    else:
+        return HttpResponse("Error")
+
+def task7(request):
+    if request.method=="POST":
+        string7=request.POST.get('text')
+        str7 = re.sub(r'(?<!^)(?=[A-Z])', '_', string7).lower()
+        params = {'analazed': str7}
+        return render(request,'user/task7.html',params)
 
     else:
         return HttpResponse("Error")
